@@ -1,0 +1,17 @@
+---
+- hosts: localhost
+  become: true
+  tasks:
+     - name: handlers play
+       copy:
+        content: "hello world"
+        dest: /var/www/html/index.html
+       notify: restart_apache
+ 
+  handlers:
+     - name: restart_apache
+       service:
+          name: httpd
+          state: restarted
+
+
